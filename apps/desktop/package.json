@@ -1,0 +1,45 @@
+{
+  "name": "desktop",
+  "version": "0.1.0",
+  "description": "AniVault Desktop App",
+  "author": "AniVault",
+  "type": "module",
+  "main": "./out/main/main.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "prebuild": "electron-vite build",
+    "build": "electron-builder --win --x64",
+    "preview": "electron-vite preview"
+  },
+  "dependencies": {
+    "@anivault/shared": "workspace:*",
+    "@anivault/ui": "workspace:*",
+    "electron-log": "^5.4.3",
+    "electron-updater": "^6.6.2",
+    "discord-rpc": "^4.0.1",
+    "electron-store": "^8.1.0",
+    "builder-util-runtime": "^9.2.6",
+    "framer-motion": "^10.16.16",
+    "lucide-react": "^0.303.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^3.5.1",
+    "conf": "^10.2.0",
+    "atomically": "^1.7.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "electron": "^39.2.6",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.0.0",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  }
+}

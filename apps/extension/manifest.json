@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "AniVault",
+  "version": "0.1.0",
+  "description": "Track anime on streaming sites and sync to AniVault Desktop",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://*.crunchyroll.com/*",
+    "https://*.netflix.com/*",
+    "https://zoro.to/*",
+    "https://*.zoro.to/*",
+    "https://aniwatch.to/*",
+    "https://*.aniwatch.to/*",
+    "https://hianime.to/*",
+    "https://*.hianime.to/*",
+    "https://zorox.to/*",
+    "https://*.zorox.to/*",
+    "https://9anime.to/*",
+    "https://*.9anime.to/*",
+    "https://aniwave.to/*",
+    "https://*.aniwave.to/*",
+    "https://gogoanime.io/*",
+    "https://*.gogoanime.io/*",
+    "https://animepahe.com/*",
+    "https://*.animepahe.com/*",
+    "https://animepahe.ru/*",
+    "https://*.animepahe.ru/*"
+  ],
+  "background": {
+    "service_worker": "src/background/background.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.crunchyroll.com/*",
+        "https://*.netflix.com/*",
+        "https://zoro.to/*",
+        "https://*.zoro.to/*",
+        "https://aniwatch.to/*",
+        "https://*.aniwatch.to/*",
+        "https://hianime.to/*",
+        "https://*.hianime.to/*",
+        "https://zorox.to/*",
+        "https://*.zorox.to/*",
+        "https://9anime.to/*",
+        "https://*.9anime.to/*",
+        "https://aniwave.to/*",
+        "https://*.aniwave.to/*",
+        "https://gogoanime.io/*",
+        "https://*.gogoanime.io/*",
+        "https://animepahe.com/*",
+        "https://*.animepahe.com/*",
+        "https://animepahe.ru/*",
+        "https://*.animepahe.ru/*"
+      ],
+      "js": ["src/content/content.ts"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
+

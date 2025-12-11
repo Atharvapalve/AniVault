@@ -1,0 +1,23 @@
+appId: com.anivault.desktop
+productName: AniVault
+directories:
+  buildResources: build
+  output: release
+files:
+  - out/**
+  - package.json
+npmRebuild: false
+asarUnpack:
+  - "**/node_modules/builder-util-runtime/**"
+  - "**/node_modules/electron-updater/**"
+win:
+  target:
+    - nsis
+  sign: null
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
