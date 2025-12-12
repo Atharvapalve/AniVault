@@ -40,13 +40,31 @@ jobs:
         id: find_artifacts
         shell: pwsh
         run: |
-          Write-Host "Searching for exe and nsis files..."
-          $exe = Get-ChildItem -Path 'apps/desktop' -Filter *.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
-          $nsis = Get-ChildItem -Path 'apps/desktop' -Filter *.nsis.* -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+          Write-Host "Searching for exe and nsis files in common output folders..."
+          $candidates = @(
+            'apps/desktop/release',
+            'apps/desktop/dist_electron',
+            'apps/desktop/dist',
+            'apps/desktop/out',
+            'apps/desktop/release',
+            'dist_electron',
+            'out'
+          )
+          $exe = ''
+          $nsis = ''
+          foreach ($d in $candidates) {
+            if (Test-Path $d) {
+              Write-Host "Checking $d"
+              $fexe = Get-ChildItem -Path $d -Filter *.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+              $fnsis = Get-ChildItem -Path $d -Filter *.nsis.* -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+              if ($fexe -and -not $exe) { $exe = $fexe }
+              if ($fnsis -and -not $nsis) { $nsis = $fnsis }
+            }
+          }
           Write-Host "Found EXE: $exe"
           Write-Host "Found NSIS: $nsis"
-          if ($exe) { Add-Content -Path $env:GITHUB_OUTPUT -Value "exe=$exe" } else { Add-Content -Path $env:GITHUB_OUTPUT -Value "exe=" }
-          if ($nsis) { Add-Content -Path $env:GITHUB_OUTPUT -Value "nsis=$nsis" } else { Add-Content -Path $env:GITHUB_OUTPUT -Value "nsis=" }
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "exe=$exe"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "nsis=$nsis"
 
 
       - name: Sign artifacts (PowerShell)
