@@ -6,14 +6,16 @@ on:
       - 'v*.*.*'
 
 permissions:
-  contents: write    # required to create releases and upload assets
-  packages: write    # optional, safe to include if you use packages
+  contents: write
+  packages: write
 
 jobs:
   build:
     runs-on: windows-latest
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # map secrets into env so we can refer to them in 'if' safely
+      SIGNING_PFX: ${{ secrets.SIGNING_PFX }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +40,6 @@ jobs:
         id: find_artifacts
         run: |
           echo "Searching for exe and nsis files..."
-          # adjust these patterns if your build outputs elsewhere
           EXE=$(powershell -NoProfile -Command "Get-ChildItem -Path 'apps/desktop' -Filter *.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { \$_.FullName }")
           NSIS=$(powershell -NoProfile -Command "Get-ChildItem -Path 'apps/desktop' -Filter *.nsis.* -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { \$_.FullName }")
           echo "exe=$EXE" >> $GITHUB_OUTPUT
@@ -47,16 +48,15 @@ jobs:
           echo "Found NSIS: $NSIS"
 
       - name: Sign artifacts (PowerShell)
-        if: ${{ secrets.SIGNING_PFX && secrets.SIGNING_PASSWORD }}
+        if: ${{ env.SIGNING_PFX != '' && env.SIGNING_PASSWORD != '' }}
         shell: pwsh
         run: |
-          $pfx = "${{ secrets.SIGNING_PFX }}"
-          $pwd = "${{ secrets.SIGNING_PASSWORD }}"
+          $pfx = "${{ env.SIGNING_PFX }}"
+          $pwd = "${{ env.SIGNING_PASSWORD }}"
           $bytes = [System.Convert]::FromBase64String($pfx)
           $pfxPath = "$env:RUNNER_TEMP\codesign.pfx"
           [System.IO.File]::WriteAllBytes($pfxPath, $bytes)
           Write-Host "Signing artifacts..."
-          # sign any .exe files in the desktop dist folder
           $files = Get-ChildItem -Path "apps/desktop" -Filter *.exe -Recurse
           foreach ($f in $files) {
             & "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /f $pfxPath /p $pwd /tr http://timestamp.digicert.com /td sha256 /fd sha256 $f.FullName
@@ -95,3 +95,4 @@ jobs:
           asset_content_type: application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
