@@ -1,4 +1,4 @@
-name: Build and Release Desktop
+﻿name: Build and Release Desktop
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
     runs-on: windows-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # expose secrets into env (they remain secret in Actions)
+      SIGNING_PFX: ${{ secrets.SIGNING_PFX }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
 
@@ -30,15 +33,17 @@ jobs:
         run: pnpm --filter apps/desktop run build
 
       - name: Sign artifacts (PowerShell)
-        if: ${{ secrets.SIGNING_PFX && secrets.SIGNING_PASSWORD }}
+        # only run signing if both env vars are non-empty
+        if: ${{ env.SIGNING_PFX != '' && env.SIGNING_PASSWORD != '' }}
         shell: pwsh
         run: |
-          $pfx = "${{ secrets.SIGNING_PFX }}"
-          $pwd = "${{ secrets.SIGNING_PASSWORD }}"
+          $pfx = "${{ env.SIGNING_PFX }}"
+          $pwd = "${{ env.SIGNING_PASSWORD }}"
           $bytes = [System.Convert]::FromBase64String($pfx)
           $pfxPath = "$env:RUNNER_TEMP\codesign.pfx"
           [System.IO.File]::WriteAllBytes($pfxPath, $bytes)
-          & "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /f $pfxPath /p $pwd /tr http://timestamp.digicert.com /td sha256 /fd sha256 "apps/desktop/dist_electron/*.exe"
+          Write-Host "Signing artifacts in apps/desktop/dist_electron"
+          & "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /f $pfxPath /p $pwd /tr http://timestamp.digicert.com /td sha256 /fd sha256 "apps/desktop/dist_electron\*.exe"
 
       - name: Create GitHub Release and upload artifacts
         uses: ncipollo/release-action@v1
@@ -49,9 +54,3 @@ jobs:
             apps/desktop/dist_electron/*.nsis.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-
-
-
-
