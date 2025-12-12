@@ -38,14 +38,16 @@ jobs:
 
       - name: Locate artifacts
         id: find_artifacts
+        shell: pwsh
         run: |
-          echo "Searching for exe and nsis files..."
-          EXE=$(powershell -NoProfile -Command "Get-ChildItem -Path 'apps/desktop' -Filter *.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { \$_.FullName }")
-          NSIS=$(powershell -NoProfile -Command "Get-ChildItem -Path 'apps/desktop' -Filter *.nsis.* -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { \$_.FullName }")
-          echo "exe=$EXE" >> $GITHUB_OUTPUT
-          echo "nsis=$NSIS" >> $GITHUB_OUTPUT
-          echo "Found EXE: $EXE"
-          echo "Found NSIS: $NSIS"
+          Write-Host "Searching for exe and nsis files..."
+          $exe = Get-ChildItem -Path 'apps/desktop' -Filter *.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+          $nsis = Get-ChildItem -Path 'apps/desktop' -Filter *.nsis.* -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+          Write-Host "Found EXE: $exe"
+          Write-Host "Found NSIS: $nsis"
+          if ($exe) { Add-Content -Path $env:GITHUB_OUTPUT -Value "exe=$exe" } else { Add-Content -Path $env:GITHUB_OUTPUT -Value "exe=" }
+          if ($nsis) { Add-Content -Path $env:GITHUB_OUTPUT -Value "nsis=$nsis" } else { Add-Content -Path $env:GITHUB_OUTPUT -Value "nsis=" }
+"
 
       - name: Sign artifacts (PowerShell)
         if: ${{ env.SIGNING_PFX != '' && env.SIGNING_PASSWORD != '' }}
@@ -95,4 +97,5 @@ jobs:
           asset_content_type: application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
