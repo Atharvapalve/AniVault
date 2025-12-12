@@ -7,11 +7,12 @@
     "dev:desktop": "pnpm --filter desktop dev",
     "dev:extension": "pnpm --filter extension dev",
     "dev:web": "pnpm --filter web dev",
-    "dev:website": "pnpm --filter website dev",
+    "dev:website": "pnpm --filter @anivault/website dev",
     "build:desktop": "pnpm --filter desktop build",
     "build:extension": "pnpm --filter extension build",
     "build:web": "pnpm --filter web build",
     "build:website": "pnpm --filter @anivault/website run build",
+    "vercel-build": "pnpm --filter @anivault/website run build",
     "build": "pnpm -r build"
   },
   "devDependencies": {
