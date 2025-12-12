@@ -11,7 +11,7 @@
     "build:desktop": "pnpm --filter desktop build",
     "build:extension": "pnpm --filter extension build",
     "build:web": "pnpm --filter web build",
-    "build:website": "pnpm --filter website build",
+    "build:website": "pnpm --filter @anivault/website run build",
     "build": "pnpm -r build"
   },
   "devDependencies": {
