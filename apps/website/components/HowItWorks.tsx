@@ -1,33 +1,31 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Search, Brain, RefreshCw, MonitorPlay } from 'lucide-react'
+import { MonitorPlay, PlugZap, Search, Shield } from 'lucide-react'
 import GlowCard from './GlowCard'
 
 const steps = [
   {
     icon: Search,
-    title: 'Detect',
-    description:
-      'AniVault looks at your open windows and media players. When it sees something like "One Piece – 1070.mkv" or "Naruto S02E10" it knows exactly what you\'re watching.',
+    title: 'Install',
+    description: 'Install AniVault for Windows. It watches VLC/MPV window titles locally — nothing leaves your PC.',
   },
   {
-    icon: Brain,
-    title: 'Understand',
+    icon: PlugZap,
+    title: 'Connect',
     description:
-      'A filename parser and AniList\'s database work together to detect the title and episode, even through messy fansub filenames.',
+      'Pair the Chrome extension and optionally connect AniList. Guest mode works with no account or telemetry.',
   },
   {
     icon: MonitorPlay,
-    title: 'Stream',
+    title: 'Watch',
     description:
-      'If you\'re watching on Crunchyroll, Zoro, Netflix or other streaming sites, the AniVault Chrome Extension detects episodes in your browser and relays them to the desktop app.',
+      'Hit play. AniVault detects episodes from local files and streaming tabs and syncs progress instantly.',
   },
   {
-    icon: RefreshCw,
-    title: 'Sync',
-    description:
-      'Your library updates automatically. If you connect AniList, your online profile syncs too — without you opening a browser.',
+    icon: Shield,
+    title: 'Sync safely',
+    description: 'Lemon Squeezy handles checkout. AniVault stores licenses locally and never sees your card.',
   },
 ]
 
@@ -44,8 +42,7 @@ const HowItWorks = () => {
         >
           <h2 className="text-4xl sm:text-5xl font-display font-bold mb-4">How AniVault Works</h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            AniVault isn't another list website. It's a local app that watches your players and browser,
-            then updates everything for you — on your PC and on AniList.
+            Three steps: install, connect extension/AniList, and watch. The rest is fully automated.
           </p>
         </motion.div>
 
