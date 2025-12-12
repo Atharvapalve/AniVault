@@ -193,9 +193,11 @@ function App() {
       {/* Header */}
       <div className="relative p-6 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">AV</span>
-          </div>
+          <img
+            src={chrome.runtime.getURL('icons/icon-48.png')}
+            alt="AniVault"
+            className="w-10 h-10 rounded-lg shadow-lg shadow-purple-500/30"
+          />
           <div>
             <h1 className="text-lg font-display font-bold">AniVault Extension</h1>
             <p className="text-xs text-gray-400">Auto-track your anime</p>
@@ -299,10 +301,10 @@ function App() {
         {/* Footer Link */}
         <div className="text-center pt-2">
           <a
-            href="#"
+            href="https://ani-vault-one.vercel.app"
             onClick={(e) => {
               e.preventDefault()
-              chrome.tabs.create({ url: 'https://anivault.app' })
+              chrome.tabs.create({ url: 'https://ani-vault-one.vercel.app' })
             }}
             className="text-xs text-purple-400 hover:text-purple-300 transition-colors"
           >

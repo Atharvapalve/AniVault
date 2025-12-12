@@ -1,4 +1,4 @@
-// Simple script to generate placeholder extension icons
+// Copy the AniVault logo into all extension icon slots.
 // Run with: node scripts/generate-icons.js
 
 import fs from 'fs'
@@ -8,28 +8,25 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Create a simple 1x1 pixel PNG as placeholder
-// This is a minimal valid PNG file (1x1 red pixel)
-const minimalPNG = Buffer.from(
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
-  'base64'
-)
-
+const logoPath = path.join(__dirname, '..', '..', 'website', 'public', 'press-kit', 'logo-mark.png')
 const iconsDir = path.join(__dirname, '..', 'icons')
 const sizes = [16, 32, 48, 128]
 
-// Ensure icons directory exists
+if (!fs.existsSync(logoPath)) {
+  throw new Error(`Logo not found at ${logoPath}`)
+}
+
 if (!fs.existsSync(iconsDir)) {
   fs.mkdirSync(iconsDir, { recursive: true })
 }
 
-// Generate placeholder icons
+const logoBuffer = fs.readFileSync(logoPath)
+
 sizes.forEach((size) => {
   const filePath = path.join(iconsDir, `icon-${size}.png`)
-  fs.writeFileSync(filePath, minimalPNG)
-  console.log(`Created ${filePath}`)
+  fs.writeFileSync(filePath, logoBuffer)
+  console.log(`Copied logo to ${filePath}`)
 })
 
-console.log('Placeholder icons generated!')
-console.log('Replace these with actual AniVault icons later.')
+console.log('Extension icons updated from logo-mark.png.')
 
