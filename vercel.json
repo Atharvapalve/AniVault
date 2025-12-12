@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm --filter @anivault/website run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "apps/website/.next",
+  "framework": "nextjs",
+  "ignoreCommand": "pnpm --filter ./apps/website run lint"
+}
