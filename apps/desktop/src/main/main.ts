@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron'
 import { join, resolve } from 'path'
+import path from 'path'
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 // @ts-ignore - discord-rpc doesn't have type definitions
 import pkg from 'discord-rpc'
@@ -35,6 +36,11 @@ interface DiscordPresenceContext {
   moodLabel?: string
   moodEmoji?: string
   themeId?: string
+}
+
+// Important: set AppUserModelId on Windows for proper taskbar/pinning behavior
+if (process.platform === 'win32') {
+  app.setAppUserModelId('com.anivault.app')
 }
 
 let mainWindow: BrowserWindow | null = null
@@ -543,7 +549,16 @@ function handleOAuthCallback(url: string) {
   }
 }
 
+function getIconPath() {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, 'assets', 'icon', 'anivault.ico')
+  }
+  return path.join(__dirname, '..', '..', 'assets', 'icon', 'anivault-256.png')
+}
+
 function createWindow() {
+  const iconPath = getIconPath()
+
   const window = new BrowserWindow({
     width: 1400,
     height: 900,
@@ -555,6 +570,7 @@ function createWindow() {
     titleBarStyle: 'hidden',
     // Ensure window animations work properly
     skipTaskbar: false,
+    icon: iconPath,
     webPreferences: {
       preload: join(__dirname, '../preload/preload.mjs'),
       nodeIntegration: false,

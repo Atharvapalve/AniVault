@@ -11,6 +11,39 @@
     "build": "electron-builder --win --x64",
     "preview": "electron-vite preview"
   },
+  "build": {
+    "appId": "com.anivault.app",
+    "productName": "AniVault",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "out/**",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon/anivault.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/icon/anivault.ico",
+      "uninstallerIcon": "assets/icon/anivault.ico",
+      "installerHeaderIcon": "assets/icon/anivault.ico"
+    },
+    "linux": {
+      "icon": "assets/icon"
+    },
+    "mac": {
+      "icon": "assets/icon/anivault.icns"
+    }
+  },
   "dependencies": {
     "@anivault/shared": "workspace:*",
     "@anivault/ui": "workspace:*",
