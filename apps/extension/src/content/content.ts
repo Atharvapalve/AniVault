@@ -257,5 +257,5 @@ window.addEventListener('beforeunload', () => {
   console.log('[AniVault] Page unloading, clearing detection')
   clearDetection()
 })
-
 console.log('[AniVault] ========== Setup complete ==========')
+
