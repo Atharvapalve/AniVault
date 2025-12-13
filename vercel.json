@@ -1,6 +1,5 @@
 {
   "buildCommand": "pnpm --filter @anivault/website run build",
   "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "ignoreCommand": "pnpm --filter @anivault/website run lint || true"
+  "framework": "nextjs"
 }
