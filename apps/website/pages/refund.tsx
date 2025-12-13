@@ -28,7 +28,7 @@ export default function RefundPage() {
           <section className="space-y-2">
             <h2 className="text-2xl font-semibold text-white">How to request</h2>
             <ol className="list-decimal list-inside space-y-2">
-              <li>Reply to your Lemon Squeezy receipt email or email support@anivault.app.</li>
+              <li>Reply to your Lemon Squeezy receipt email or email anivault.one@gmail.com.</li>
               <li>Include your order ID and the issue you faced.</li>
               <li>We will respond within 2 business days.</li>
             </ol>

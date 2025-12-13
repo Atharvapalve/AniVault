@@ -141,7 +141,7 @@ const Pricing = ({ checkoutUrl, sandboxUrl }: PricingProps) => {
                 ))
               ) : (
                 <Link
-                  href="mailto:support@anivault.app?subject=AniVault%20Pro%20Request"
+                  href="mailto:anivault.one@gmail.com?subject=AniVault%20Pro%20Request"
                   className="w-full inline-flex justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg shadow-purple-500/40 hover:-translate-y-0.5 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
                 >
                   Request Pro access
@@ -150,8 +150,8 @@ const Pricing = ({ checkoutUrl, sandboxUrl }: PricingProps) => {
               <p className="text-xs text-gray-300 text-center leading-relaxed">
                 After purchase, copy the license key from your Lemon Squeezy receipt and paste it in
                 AniVault desktop: Settings → License. Need help?{' '}
-                <Link href="mailto:support@anivault.app" className="text-purple-200 underline">
-                  support@anivault.app
+                <Link href="mailto:anivault.one@gmail.com" className="text-purple-200 underline">
+                  anivault.one@gmail.com
                 </Link>
                 .
               </p>

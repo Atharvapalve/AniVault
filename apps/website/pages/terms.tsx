@@ -47,8 +47,8 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold text-white">Contact</h2>
             <p>
               For questions, email{' '}
-              <a href="mailto:support@anivault.app" className="text-purple-300 underline">
-                support@anivault.app
+              <a href="mailto:anivault.one@gmail.com" className="text-purple-300 underline">
+                anivault.one@gmail.com
               </a>
               .
             </p>
