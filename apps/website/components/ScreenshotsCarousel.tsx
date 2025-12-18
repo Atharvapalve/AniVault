@@ -31,6 +31,14 @@ const slides: Slide[] = [
 const ScreenshotsCarousel = () => {
   const [index, setIndex] = useState(0)
 
+  // Preload all images to prevent layout shifts
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new Image()
+      img.src = slide.image
+    })
+  }, [])
+
   useEffect(() => {
     const id = setInterval(() => setIndex((prev) => (prev + 1) % slides.length), 5000)
     return () => clearInterval(id)
@@ -52,26 +60,28 @@ const ScreenshotsCarousel = () => {
         </div>
 
         <div className="relative glass-card overflow-hidden border-white/10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={slides[index].title}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.4 }}
-              className="p-6 md:p-10"
-              aria-live="polite"
-            >
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <img
-                  src={slides[index].image}
-                  alt={slides[index].title}
-                  className="w-full rounded-xl border border-white/10 shadow-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10"
-                  loading="lazy"
-                />
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-display font-semibold">{slides[index].title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{slides[index].description}</p>
+          <div className="p-4 md:p-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slides[index].title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="grid lg:grid-cols-2 gap-6 items-center"
+                aria-live="polite"
+              >
+                <div className="relative w-full max-h-[400px] rounded-xl border border-white/10 shadow-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 overflow-hidden flex items-center justify-center">
+                  <img
+                    src={slides[index].image}
+                    alt={slides[index].title}
+                    className="w-full h-full object-contain"
+                    loading="eager"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-xl md:text-2xl font-display font-semibold">{slides[index].title}</h3>
+                  <p className="text-sm md:text-base text-gray-300 leading-relaxed">{slides[index].description}</p>
                   <div className="flex items-center gap-2" aria-label="Screenshot progress">
                     {slides.map((_, i) => (
                       <span
@@ -84,9 +94,9 @@ const ScreenshotsCarousel = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           <button
             type="button"

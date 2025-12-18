@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import CTA from '../components/CTA'
 import Pricing from '../components/Pricing'
-import { CHECKOUT_PROD, CHECKOUT_SANDBOX, CHECKOUT_URL, DOWNLOAD_URL, SITE_URL } from '../lib/links'
+import { CHECKOUT_URL, DOWNLOAD_URL, SITE_URL } from '../lib/links'
 
 export default function PricingPage() {
-  const checkoutUrl = CHECKOUT_PROD || CHECKOUT_URL
-  const sandboxUrl = CHECKOUT_SANDBOX
+  const checkoutUrl = CHECKOUT_URL
 
   return (
     <>
@@ -22,12 +21,11 @@ export default function PricingPage() {
           <p className="text-sm uppercase tracking-wide text-purple-200">Pricing</p>
           <h1 className="text-4xl sm:text-5xl font-display font-bold">Free forever. Pro when ready.</h1>
           <p className="text-gray-300 max-w-3xl mx-auto">
-            Lemon Squeezy hosted checkout keeps payment data off our stack. Use the sandbox link to submit
-            verification proof, then flip to production when you are ready.
+            Lemon Squeezy hosted checkout keeps payment data off our stack. Secure payment processing with no data stored on our servers.
           </p>
         </div>
 
-        <Pricing checkoutUrl={checkoutUrl} sandboxUrl={sandboxUrl} />
+        <Pricing checkoutUrl={checkoutUrl} />
 
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <div className="glass-card p-6 md:p-8 space-y-4">
@@ -38,8 +36,7 @@ export default function PricingPage() {
               <li>Open AniVault desktop → Settings → License → Paste key → Activate.</li>
             </ol>
             <p className="text-sm text-gray-400">
-              Sandboxed purchases are for testing only. Switch the environment variables to production to
-              go live.
+              All purchases are processed securely through Lemon Squeezy's hosted checkout.
             </p>
           </div>
         </section>

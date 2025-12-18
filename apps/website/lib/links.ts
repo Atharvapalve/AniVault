@@ -10,9 +10,7 @@ export const EXTENSION_URL =
   process.env.NEXT_PUBLIC_EXTENSION_URL ||
   'https://chromewebstore.google.com/detail/anivault-extension-placeholder'
 
-export const CHECKOUT_SANDBOX = process.env.NEXT_PUBLIC_LEMON_SQUEEZY_CHECKOUT_URL_SANDBOX || ''
-export const CHECKOUT_PROD = process.env.NEXT_PUBLIC_LEMON_SQUEEZY_CHECKOUT_URL_PROD || ''
-export const CHECKOUT_URL = CHECKOUT_PROD || CHECKOUT_SANDBOX
+export const CHECKOUT_URL = process.env.NEXT_PUBLIC_LEMON_SQUEEZY_CHECKOUT_URL_PROD || 'https://anivault.lemonsqueezy.com/buy/485b9b33-04f9-462f-91b9-761dc4fc7601'
 
 export const ANALYTICS_ID = process.env.NEXT_PUBLIC_ANALYTICS_ID || ''
 

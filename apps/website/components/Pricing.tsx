@@ -7,7 +7,6 @@ import GlowCard from './GlowCard'
 
 type PricingProps = {
   checkoutUrl?: string
-  sandboxUrl?: string
 }
 
 const parseProductId = (url?: string) => {
@@ -35,22 +34,17 @@ const proBenefits = [
   'Premium themes + extended Discord presence',
 ]
 
-const Pricing = ({ checkoutUrl, sandboxUrl }: PricingProps) => {
-  const primaryCheckout = checkoutUrl || sandboxUrl
-  const actions = [
-    checkoutUrl && {
-      label: 'Buy Pro (Live)',
-      url: checkoutUrl,
-      tone: 'live',
-      productId: parseProductId(checkoutUrl),
-    },
-    sandboxUrl && {
-      label: 'Test Checkout (Sandbox)',
-      url: sandboxUrl,
-      tone: 'sandbox',
-      productId: parseProductId(sandboxUrl),
-    },
-  ].filter(Boolean) as { label: string; url: string; tone: 'live' | 'sandbox'; productId: string }[]
+const Pricing = ({ checkoutUrl }: PricingProps) => {
+  const actions = checkoutUrl
+    ? [
+        {
+          label: 'Buy Pro',
+          url: checkoutUrl,
+          tone: 'live' as const,
+          productId: parseProductId(checkoutUrl),
+        },
+      ]
+    : []
 
   return (
     <section id="pricing" className="py-24 px-4 sm:px-6 lg:px-8 relative">
@@ -107,9 +101,6 @@ const Pricing = ({ checkoutUrl, sandboxUrl }: PricingProps) => {
                 <p className="text-sm uppercase tracking-wide text-purple-200">Pro</p>
                 <h3 className="text-3xl font-display font-bold">Creator</h3>
                 <p className="text-gray-400">For collectors and binge pros.</p>
-                {!checkoutUrl && sandboxUrl && (
-                  <p className="text-xs text-purple-200 mt-1">Sandbox checkout for verification</p>
-                )}
               </div>
               <Zap className="w-10 h-10 text-purple-300" aria-hidden="true" />
             </div>
@@ -156,7 +147,7 @@ const Pricing = ({ checkoutUrl, sandboxUrl }: PricingProps) => {
                 .
               </p>
             </div>
-            {primaryCheckout && (
+            {checkoutUrl && (
               <p className="text-[11px] text-gray-400 text-center">
                 Hosted checkout handled by Lemon Squeezy. No payment data touches AniVault servers.
               </p>

@@ -6,8 +6,6 @@ import HowItWorks from '../components/HowItWorks'
 import Pricing from '../components/Pricing'
 import ScreenshotsCarousel from '../components/ScreenshotsCarousel'
 import {
-  CHECKOUT_PROD,
-  CHECKOUT_SANDBOX,
   CHECKOUT_URL,
   DOWNLOAD_URL,
   EXTENSION_URL,
@@ -40,8 +38,7 @@ const structuredData = {
 }
 
 export default function HomePage() {
-  const checkoutUrl = CHECKOUT_PROD || CHECKOUT_URL
-  const sandboxUrl = CHECKOUT_SANDBOX
+  const checkoutUrl = CHECKOUT_URL
 
   return (
     <>
@@ -62,7 +59,7 @@ export default function HomePage() {
       <Hero downloadUrl={DOWNLOAD_URL} checkoutUrl={checkoutUrl} extensionUrl={EXTENSION_URL} />
       <FeatureGrid />
       <HowItWorks />
-      <Pricing checkoutUrl={checkoutUrl} sandboxUrl={sandboxUrl} />
+      <Pricing checkoutUrl={checkoutUrl} />
       <ScreenshotsCarousel />
 
       <section id="trust" className="py-16 px-4 sm:px-6 lg:px-8">

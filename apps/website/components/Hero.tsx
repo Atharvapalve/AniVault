@@ -109,24 +109,24 @@ const Hero = ({ downloadUrl, checkoutUrl, extensionUrl }: HeroProps) => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative"
+          className="relative ml-8 lg:ml-12"
           aria-label="AniVault interface preview"
         >
           <div className="absolute -inset-8 bg-gradient-to-br from-purple-500/20 via-pink-500/15 to-blue-500/10 blur-[80px]" />
-          <div className="relative glass-card overflow-hidden border-white/20 shadow-2xl">
+          <div className="relative glass-card overflow-hidden border-white/20 shadow-2xl max-w-[90%]">
             <img
-              src="/press-kit/hero-1600x900.svg"
+              src="/press-kit/maxresdefault.jpg"
               alt="AniVault desktop showing library and playback detection"
               className="w-full object-cover"
               loading="lazy"
             />
-            <div className="absolute top-4 right-4 glass-card px-4 py-3 rounded-xl text-sm text-white space-y-1 max-w-xs">
+            <div className="absolute top-3 right-3 glass-card px-3 py-2 rounded-lg text-xs text-white space-y-0.5 max-w-[200px]">
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-300">Live detection</span>
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
+                <span className="text-[10px] text-gray-300">Live detection</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
               </div>
-              <p className="font-semibold">Jujutsu Kaisen — Episode 28</p>
-              <p className="text-gray-300 text-xs">Synced to AniList • Discord Presence on</p>
+              <p className="font-semibold text-xs">Jujutsu Kaisen — Episode 28</p>
+              <p className="text-gray-300 text-[10px]">Synced to AniList • Discord Presence on</p>
             </div>
           </div>
         </motion.div>
