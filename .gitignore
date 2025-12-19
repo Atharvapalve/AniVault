@@ -49,3 +49,10 @@ apps/extension/*.zip
 # Astro
 apps/web/.astro
 
+# Build artifacts (large files)
+*.exe
+*.asar
+resources/
+AniVault.exe
+Uninstall*.exe
+
