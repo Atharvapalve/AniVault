@@ -32,11 +32,18 @@ function App() {
         // Get current tab
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
         const currentTab = tab ? { url: tab.url, title: tab.title } : null
-        const isSupportedSite =
-          currentTab?.url?.includes('crunchyroll.com') ||
-          currentTab?.url?.includes('netflix.com') ||
-          /zoro|aniwatch|hianime|zorox|9anime|aniwave|gogoanime|animepahe/i.test(currentTab?.url || '') ||
-          false
+        let isSupportedSite = false
+        try {
+          if (currentTab?.url) {
+            const hostname = new URL(currentTab.url).hostname
+            isSupportedSite =
+              hostname.endsWith('crunchyroll.com') ||
+              hostname.endsWith('netflix.com') ||
+              /zoro|aniwatch|hianime|zorox|9anime|aniwave|gogoanime|animepahe/i.test(hostname)
+          }
+        } catch (e) {
+          // Ignore invalid URLs
+        }
 
         // Get settings, lastDetected, and recentActivity
         const storage = await chrome.storage.local.get([

@@ -329,7 +329,7 @@ const AnimeDetailsModal = ({ anime, isOpen, onClose, onStatusChange }: AnimeDeta
                           <h3 className="text-xl font-semibold">Description</h3>
                           <div className="max-h-64 overflow-y-auto scrollbar-hide pr-2">
                             <p className="text-gray-300 leading-relaxed">
-                              {anime.description.replace(/<[^>]*>/g, '')}
+                              {anime.description.replace(/<\/?[^>]+(>|$)/g, '')}
                             </p>
                           </div>
                         </motion.div>

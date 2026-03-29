@@ -391,8 +391,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
  */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url) {
-    if (tab.url.includes('crunchyroll.com') || tab.url.includes('netflix.com')) {
-      console.log('[AniVault] Streaming site detected:', tab.url)
+    try {
+      const hostname = new URL(tab.url).hostname
+      if (hostname.endsWith('crunchyroll.com') || hostname.endsWith('netflix.com')) {
+        console.log('[AniVault] Streaming site detected:', tab.url)
+      }
+    } catch (e) {
+      // Ignore invalid URLs
     }
   }
 })
@@ -404,14 +409,19 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
   // Check if any tabs with streaming sites are still open
   const tabs = await chrome.tabs.query({})
   const hasStreamingTab = tabs.some((tab) => {
-    const url = tab.url || ''
-    return (
-      url.includes('crunchyroll.com') ||
-      url.includes('netflix.com') ||
-      url.includes('zoro') ||
-      url.includes('animepahe') ||
-      url.includes('9anime')
-    )
+    try {
+      if (!tab.url) return false
+      const hostname = new URL(tab.url).hostname
+      return (
+        hostname.endsWith('crunchyroll.com') ||
+        hostname.endsWith('netflix.com') ||
+        hostname.includes('zoro') ||
+        hostname.includes('animepahe') ||
+        hostname.includes('9anime')
+      )
+    } catch (e) {
+      return false
+    }
   })
 
   // If no streaming tabs remain, clear detection
