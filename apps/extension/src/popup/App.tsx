@@ -16,6 +16,9 @@ interface PopupState {
 }
 
 function App() {
+  const isAllowedHost = (hostname: string, baseDomain: string): boolean =>
+    hostname === baseDomain || hostname.endsWith(`.${baseDomain}`)
+
   const [state, setState] = useState<PopupState>({
     settings: null,
     lastDetected: null,
@@ -37,8 +40,8 @@ function App() {
           if (currentTab?.url) {
             const hostname = new URL(currentTab.url).hostname
             isSupportedSite =
-              hostname.endsWith('crunchyroll.com') ||
-              hostname.endsWith('netflix.com') ||
+              isAllowedHost(hostname, 'crunchyroll.com') ||
+              isAllowedHost(hostname, 'netflix.com') ||
               /zoro|aniwatch|hianime|zorox|9anime|aniwave|gogoanime|animepahe/i.test(hostname)
           }
         } catch (e) {
