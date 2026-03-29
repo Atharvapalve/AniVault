@@ -15,6 +15,10 @@ interface PopupState {
   isLoading: boolean
 }
 
+const isExactOrSubdomain = (hostname: string, domain: string): boolean => {
+  return hostname === domain || hostname.endsWith(`.${domain}`)
+}
+
 function App() {
   const [state, setState] = useState<PopupState>({
     settings: null,
@@ -37,8 +41,8 @@ function App() {
           if (currentTab?.url) {
             const hostname = new URL(currentTab.url).hostname
             isSupportedSite =
-              hostname.endsWith('crunchyroll.com') ||
-              hostname.endsWith('netflix.com') ||
+              isExactOrSubdomain(hostname, 'crunchyroll.com') ||
+              isExactOrSubdomain(hostname, 'netflix.com') ||
               /zoro|aniwatch|hianime|zorox|9anime|aniwave|gogoanime|animepahe/i.test(hostname)
           }
         } catch (e) {
