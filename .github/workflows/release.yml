@@ -1,4 +1,4 @@
-﻿name: Build and Release Desktop
+name: Build and Release Desktop
 
 on:
   push:
@@ -24,6 +24,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -85,6 +90,7 @@ jobs:
       - name: Create GitHub release
         id: create_release
         uses: actions/create-release@v1
+        continue-on-error: true
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
