@@ -16,8 +16,8 @@
     "build": "pnpm -r build"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "typescript": "^5.3.3"
+    "@types/node": "^20.19.37",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -26,6 +26,6 @@
   "dependencies": {
     "electron-builder": "^24.13.3",
     "electron-log": "^5.4.3",
-    "electron-updater": "^6.6.2"
+    "electron-updater": "^6.8.3"
   }
 }
