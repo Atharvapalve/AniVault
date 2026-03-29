@@ -389,11 +389,16 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 /**
  * Track tab updates to detect streaming sites
  */
+const isStreamingHostname = (hostname: string): boolean => {
+  const streamingDomains = ['crunchyroll.com', 'netflix.com']
+  return streamingDomains.some((domain) => hostname === domain || hostname.endsWith('.' + domain))
+}
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url) {
     try {
       const hostname = new URL(tab.url).hostname
-      if (hostname.endsWith('crunchyroll.com') || hostname.endsWith('netflix.com')) {
+      if (isStreamingHostname(hostname)) {
         console.log('[AniVault] Streaming site detected:', tab.url)
       }
     } catch (e) {
@@ -413,8 +418,7 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
       if (!tab.url) return false
       const hostname = new URL(tab.url).hostname
       return (
-        hostname.endsWith('crunchyroll.com') ||
-        hostname.endsWith('netflix.com') ||
+        isStreamingHostname(hostname) ||
         hostname.includes('zoro') ||
         hostname.includes('animepahe') ||
         hostname.includes('9anime')
