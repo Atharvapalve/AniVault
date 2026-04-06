@@ -5,17 +5,13 @@ Auto-track anime episodes on streaming sites and sync with AniVault Desktop.
 ## Supported Sites
 
 ### First-Class Support
-- **Crunchyroll** - Official streaming platform
+- **Crunchyroll** - Official anime streaming platform
 - **Netflix** - Official streaming platform
-- **Zoro / AniWatch / HiAnime / ZoroX / AniWave** - Popular anime streaming clones
-- **9anime / AniWave** - 9anime and reskins
 
 ### Generic Fallback
-The extension includes a generic adapter that works on **any anime streaming site** that:
+The extension includes a generic adapter that works on **any video streaming site** that:
 - Has a `<video>` element
 - Shows episode information in the page title or headings
-
-This means the extension will work on most anime sites out of the box, even if they're not explicitly listed!
 
 ## Development
 
@@ -75,7 +71,7 @@ interface SiteAdapter {
 }
 ```
 
-This allows one adapter to cover multiple clones (e.g., Zoro adapter works on zoro.to, zoro.sx, aniwatch.to, etc.)
+This allows one adapter to cover multiple licensed platforms with a single implementation.
 
 ## Configuration
 

@@ -41,8 +41,7 @@ function App() {
             const hostname = new URL(currentTab.url).hostname
             isSupportedSite =
               isAllowedHost(hostname, 'crunchyroll.com') ||
-              isAllowedHost(hostname, 'netflix.com') ||
-              /zoro|aniwatch|hianime|zorox|9anime|aniwave|gogoanime|animepahe/i.test(hostname)
+              isAllowedHost(hostname, 'netflix.com')
           }
         } catch (e) {
           // Ignore invalid URLs
@@ -158,16 +157,9 @@ function App() {
         return 'Crunchyroll'
       case 'netflix':
         return 'Netflix'
-      case 'zoro':
-        return 'Zoro/AniWatch'
-      case 'nineanime':
-        return '9anime'
-      case 'animepahe':
-        return 'AnimePahe'
       case 'generic':
-        return 'anime site'
       default:
-        return platform
+        return 'anime site'
     }
   }
 
@@ -177,14 +169,6 @@ function App() {
         return '🎌'
       case 'netflix':
         return '🎬'
-      case 'zoro':
-        return '⚔️'
-      case 'nineanime':
-        return '9️⃣'
-      case 'animepahe':
-        return '📺'
-      case 'generic':
-        return '📺'
       default:
         return '📺'
     }

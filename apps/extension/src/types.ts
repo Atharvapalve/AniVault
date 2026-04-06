@@ -1,6 +1,6 @@
 // Extension-specific types
 
-export type Platform = 'crunchyroll' | 'netflix' | 'zoro' | 'nineanime' | 'animepahe' | 'generic'
+export type Platform = 'crunchyroll' | 'netflix' | 'generic'
 
 export interface EpisodeInfo {
   platform: Platform

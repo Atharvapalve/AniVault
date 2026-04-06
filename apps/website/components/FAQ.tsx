@@ -19,7 +19,7 @@ const faqs = [
   {
     question: 'Does AniVault work with streaming sites?',
     answer:
-      'Yes. The AniVault Chrome Extension can detect episodes on popular streaming sites (like Crunchyroll, Zoro, Netflix and others) and send that progress into the AniVault desktop app. During testing, it is available as a developer install.',
+      'Yes. The AniVault Chrome Extension can detect episodes on licensed streaming platforms (like Crunchyroll and Netflix) and send that progress into the AniVault desktop app. During testing, it is available as a developer install.',
   },
   {
     question: 'What platforms does AniVault support?',

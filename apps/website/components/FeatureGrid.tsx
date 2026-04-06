@@ -31,7 +31,7 @@ const features = [
     icon: MonitorPlay,
     title: 'Chrome extension detection',
     description:
-      'Detects Crunchyroll, Netflix, Zoro, and more. Episodes are pushed to the desktop app instantly.',
+      'Detects Crunchyroll, Netflix, and more licensed streaming platforms. Episodes are pushed to the desktop app instantly.',
   },
   {
     category: 'free',

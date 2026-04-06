@@ -10,25 +10,7 @@
   ],
   "host_permissions": [
     "https://*.crunchyroll.com/*",
-    "https://*.netflix.com/*",
-    "https://zoro.to/*",
-    "https://*.zoro.to/*",
-    "https://aniwatch.to/*",
-    "https://*.aniwatch.to/*",
-    "https://hianime.to/*",
-    "https://*.hianime.to/*",
-    "https://zorox.to/*",
-    "https://*.zorox.to/*",
-    "https://9anime.to/*",
-    "https://*.9anime.to/*",
-    "https://aniwave.to/*",
-    "https://*.aniwave.to/*",
-    "https://gogoanime.io/*",
-    "https://*.gogoanime.io/*",
-    "https://animepahe.com/*",
-    "https://*.animepahe.com/*",
-    "https://animepahe.ru/*",
-    "https://*.animepahe.ru/*"
+    "https://*.netflix.com/*"
   ],
   "background": {
     "service_worker": "src/background/background.ts",
@@ -38,25 +20,7 @@
     {
       "matches": [
         "https://*.crunchyroll.com/*",
-        "https://*.netflix.com/*",
-        "https://zoro.to/*",
-        "https://*.zoro.to/*",
-        "https://aniwatch.to/*",
-        "https://*.aniwatch.to/*",
-        "https://hianime.to/*",
-        "https://*.hianime.to/*",
-        "https://zorox.to/*",
-        "https://*.zorox.to/*",
-        "https://9anime.to/*",
-        "https://*.9anime.to/*",
-        "https://aniwave.to/*",
-        "https://*.aniwave.to/*",
-        "https://gogoanime.io/*",
-        "https://*.gogoanime.io/*",
-        "https://animepahe.com/*",
-        "https://*.animepahe.com/*",
-        "https://animepahe.ru/*",
-        "https://*.animepahe.ru/*"
+        "https://*.netflix.com/*"
       ],
       "js": ["src/content/content.ts"],
       "run_at": "document_idle",

@@ -418,10 +418,7 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
       if (!tab.url) return false
       const hostname = new URL(tab.url).hostname
       return (
-        isStreamingHostname(hostname) ||
-        hostname.includes('zoro') ||
-        hostname.includes('animepahe') ||
-        hostname.includes('9anime')
+        isStreamingHostname(hostname)
       )
     } catch (e) {
       return false

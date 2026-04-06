@@ -317,7 +317,7 @@ function registerWindowHandlers() {
  * Handle extension episode completion events
  */
 function handleExtensionEpisodeComplete(event: {
-  platform: 'crunchyroll' | 'netflix' | 'zoro' | 'nineanime' | 'animepahe' | 'generic'
+  platform: 'crunchyroll' | 'netflix' | 'generic'
   title: string
   overallEpisode: number | null
   seasonNumber: number | null
