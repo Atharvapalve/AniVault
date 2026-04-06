@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AniVault",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Track anime on streaming sites and sync to AniVault Desktop",
   "permissions": [
     "storage",
